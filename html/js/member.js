@@ -2,9 +2,10 @@ $(document).ready(function() {
 
   showMember();
 
-
   $("#rank-select").html(rankOptionHtml());
   $("#password_visibility").click(function(){
+  $("#position-select").html(positionOptionHtml());
+  $("#department-select").html(departmentOptionHtml());
 
 // Check the checkbox state
 if($(this).is(':checked')){
@@ -16,9 +17,6 @@ if($(this).is(':checked')){
  $("#password-member").attr("type","password");
 }
 });
-
-$("#position-select").html(positionOptionHtml());
-$("#department-select").html(departmentOptionHtml());
 
   $("#member-add").click(function() {
     link('control/member_add.php', '#home', '#topic', menu("member","l1"), '#bread');
@@ -607,7 +605,7 @@ $("#department-select").html(departmentOptionHtml());
   }
 
   function departmentOptionHtml() {
-    var optionrank;
+    var optiondepartment;
 
     $.ajax({
       url: 'control/ajax/ajax_member.php',
@@ -618,16 +616,16 @@ $("#department-select").html(departmentOptionHtml());
       },
       dataType: 'json',
       success: function (output) {
-        optionrank += "<option disabled='disabled' selected='selected' value='0'>กรุณาเลือกหน่วย</option>";
+        optiondepartment += "<option disabled='disabled' selected='selected' value='0'>กรุณาเลือกหน่วย</option>";
 
         $.each(output.department,
           function(index,value) {
-            optionrank += "<option value='"+value.dep_id+"'>"+value.dep_short+value.org_short+"</option>";
+            optiondepartment += "<option value='"+value.dep_id+"'>"+value.dep_short+value.org_short+"</option>";
         });
       }
     });
 
-    return optionrank;
+    return optiondepartment;
   }
 
   function showMember() {
