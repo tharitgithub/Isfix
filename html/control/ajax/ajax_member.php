@@ -44,20 +44,20 @@ if (isset($_POST["id"])) {
     $userde_id = $result["userde_id"];
       $MEMBER->delete_Member($user_id,$userde_id);
   }elseif ($id=="get_rank") {
-    $result = $MEMBERADD->getRank();
-    $getJson = $MEMBERADD->getJson($result);
+    $result = $MEMBER->getRank();
+    $getJson = $MEMBER->getJson($result);
     echo $getJson;
   }elseif($id=="get_position"){
-    $result = $MEMBERADD->getPosition();
-    $getJson = $MEMBERADD->getJson($result);
+    $result = $MEMBER->getPosition();
+    $getJson = $MEMBER->getJson($result);
     echo $getJson;
   }else if($id=="get_department"){
-    $result = $MEMBERADD->getDepartment();
-    $getJson = $MEMBERADD->getJson($result);
+    $result = $MEMBER->getDepartment();
+    $getJson = $MEMBER->getJson($result);
     echo $getJson;
   }else if($id=="member_add"){
 
-    return  $MEMBERADD->memberAdd($_POST["username"],$_POST["password"],$_POST["rank"],$_POST["name"],$_POST["lastname"],$_POST["phonenumber"],$_POST["position"],$_POST["department"],$_POST["permiss"]);
+    return  $MEMBER->memberAdd($_POST["username"],$_POST["password"],$_POST["rank"],$_POST["name"],$_POST["lastname"],$_POST["phonenumber"],$_POST["position"],$_POST["department"],$_POST["permiss"]);
 
   }else {
     // code...
