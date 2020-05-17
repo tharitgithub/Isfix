@@ -4,8 +4,7 @@ $(document).ready(function() {
 
   $("#rank-select").html(rankOptionHtml());
   $("#password_visibility").click(function(){
-  $("#position-select").html(positionOptionHtml());
-  $("#department-select").html(departmentOptionHtml());
+
 
 // Check the checkbox state
 if($(this).is(':checked')){
@@ -17,6 +16,9 @@ if($(this).is(':checked')){
  $("#password-member").attr("type","password");
 }
 });
+
+$("#position-select").html(positionOptionHtml());
+$("#department-select").html(departmentOptionHtml());
 
   $("#member-add").click(function() {
     link('control/member_add.php', '#home', '#topic', menu("member","l1"), '#bread');
