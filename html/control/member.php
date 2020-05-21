@@ -38,21 +38,7 @@
           <tbody id="member_tbody">
 
           </tbody>
-          <tfoot>
-            <tr>
-              <th>#</th>
-              <th>ชั้นยศ</th>
-              <th>ชื่อ</th>
-              <th>นามสกุล</th>
-              <th>ตำแหน่ง</th>
-              <th class="text-center">ข้อมูล</th>
-              <th>สิทธิ์การเข้าถึง</th>
-              <th>สถานะผู้ใช้งาน</th>
-              <th class="text-center">จัดการสิทธิ์</th>
-              <th class="text-center" width="4%">ลบ</th>
-
-            </tr>
-          </tfoot>
+          
         </table>
       </div>
       <!-- /.card-body -->

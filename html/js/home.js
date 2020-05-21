@@ -10,18 +10,18 @@ $(document).ready(function() {
 
   $('#parts_js2').click(function() {
 
-    link('control/spname.php', '#home', '#topic', menu["parts"]["l2"], '#bread');
+    link('control/category.php', '#home', '#topic', menu["parts"]["l2"], '#bread');
 
   });
 
   $('#parts_js3').click(function() {
 
-    link('control/sptype.php', '#home', '#topic', menu["parts"]["l3"], '#bread');
+    link('control/spname.php', '#home', '#topic', menu["parts"]["l3"], '#bread');
 
   });
   $('#parts_js4').click(function() {
 
-    link('control/category.php', '#home', '#topic', menu["parts"]["l4"], '#bread');
+    link('control/sptype.php', '#home', '#topic', menu["parts"]["l4"], '#bread');
 
   });
 

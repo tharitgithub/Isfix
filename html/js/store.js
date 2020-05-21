@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
   $("#storeAdd_button").click(function() {
     link('control/store_add.php', '#home', '#topic', menu("parts","l1"), '#bread');
   });
@@ -10,14 +9,67 @@ $(document).ready(function() {
   $("#budget-select").html(budgetHtml());
   $("#category-select").html(categoryHtml());
 
+
+$("#table_store").append(table());
+                  datatables();
+
+
   $("#category-select").change(function () {
     var spcategory_id = $("#category-select option:selected").val();
     $("#table_store").empty();
     $("#table_store").append(showStore(spcategory_id));
-    $("#store_table").DataTable();
+                              datatables();
+
   });
 
+  function table() {
+    var table="";
 
+    $.ajax({
+      url: 'control/ajax/ajax_store.php',
+      async: false,
+      type: 'post',
+      data: {
+        id: "get_loginlevel"
+      },
+      success: function (level) {
+    table+="<table id='store_table' class='table table-bordered table-hover table-show'>"+
+           "<thead>"+
+           thead_tfoot(level)+
+           "</thead>"+
+           "<tbody>"+
+           "</tbody>"+
+           "</table>";
+         }
+       });
+    return table;
+  }
+
+  function datatables() {
+    $("#store_table").DataTable({
+      ordering:false,
+      lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
+      "oLanguage": {
+                "sLengthMenu": "แสดง _MENU_ แถว ต่อหน้า",
+                "sZeroRecords": "ไม่พบข้อมูล",
+                "sEmptyTable":     "ไม่มีข้อมูลในตาราง",
+                "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
+                "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 แถว",
+                "sInfoFiltered": "(จากแถวทั้งหมด _MAX_ แถว)",
+                "sSearch": "ค้นหา :",
+                "oPaginate": {
+                            "sFirst":    "หน้าแรก",
+                            "sPrevious": "ก่อนหน้า",
+                            "sNext":     "ถัดไป",
+                            "sLast":     "หน้าสุดท้าย"
+                              },
+                "oAria": {
+                            "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                            "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+                          }
+              }
+    });
+  }
 
   function showStore(spcategory_id) {
     var table="";
@@ -45,7 +97,6 @@ $(document).ready(function() {
                        thead_tfoot(level)+
                        "</thead>"+
                        "<tbody>";
-
              $.each(response.store,
               function(index,value) {
               table += "<tr>"+
@@ -67,14 +118,11 @@ $(document).ready(function() {
                             }
 
                      table+="</tr>";
+
                        });
 
-
-                 table+="</tbody>"+
-                       "<tfoot>"+
-                       thead_tfoot(level)+
-                       "</tfoot>"+
-                       "</table>";
+                       table+="</tbody>"+
+                              "</table>";
 
             }
           });//end of get_store
@@ -86,14 +134,12 @@ $(document).ready(function() {
   }
 
 
-
-
   function thead_tfoot(level) {
     var thead_tfoot="";
     if (level!="OFFICER") {
       thead_tfoot+="<tr class='text-left'>";
       thead_tfoot+="<th class='text-center'>#</th>";
-      thead_tfoot+="<th>รายการ</th>";
+      thead_tfoot+="<th width='20%'>รายการ</th>";
       thead_tfoot+="<th>Part Number</th>";
       thead_tfoot+="<th class='text-right'>จำนวนจัดซื้อ</th>";
       thead_tfoot+="<th class='text-center'>ปีงบประมาณ</th>";
@@ -108,7 +154,7 @@ $(document).ready(function() {
     }else {
       thead_tfoot+="<tr class='text-left'>";
       thead_tfoot+="<th class='text-center'>#</th>";
-      thead_tfoot+="<th>รายการ</th>";
+      thead_tfoot+="<th width='20%'>รายการ</th>";
       thead_tfoot+="<th>Part Number</th>";
       thead_tfoot+="<th class='text-right'>จำนวนจัดซื้อ</th>";
       thead_tfoot+="<th class='text-right'>คงเหลือ</th>";
@@ -249,7 +295,7 @@ $(document).ready(function() {
   }
 
   function categoryHtml() {
-    var optionsptype;
+    var optionCategory;
 
     $.ajax({
       url: 'control/ajax/ajax_store.php',
@@ -260,16 +306,16 @@ $(document).ready(function() {
       },
       dataType: 'json',
       success: function (output) {
-        optionsptype += "<option disabled='disabled' selected='selected'>กรุณาเลือกประเภท</option>";
+        optionCategory += "<option disabled='disabled' selected='selected'>กรุณาเลือกประเภท</option>";
 
         $.each(output.category,
           function(index,value) {
-            optionsptype += "<option value='"+value.spcategory_id+"'>"+value.spcategory_name+"</option>";
+            optionCategory += "<option value='"+value.spcategory_id+"'>"+value.spcategory_name+"</option>";
         });
       }
     });
 
-    return optionsptype;
+    return optionCategory;
   }
 
   function budgetHtml() {

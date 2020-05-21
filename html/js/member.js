@@ -3,9 +3,10 @@ $(document).ready(function() {
   showMember();
 
   $("#rank-select").html(rankOptionHtml());
+  $("#position-select").html(positionOptionHtml());
+  $("#department-select").html(departmentOptionHtml());
+
   $("#password_visibility").click(function(){
-
-
 // Check the checkbox state
 if($(this).is(':checked')){
  // Changing type attribute
@@ -16,9 +17,6 @@ if($(this).is(':checked')){
  $("#password-member").attr("type","password");
 }
 });
-
-$("#position-select").html(positionOptionHtml());
-$("#department-select").html(departmentOptionHtml());
 
   $("#member-add").click(function() {
     link('control/member_add.php', '#home', '#topic', menu("member","l1"), '#bread');
@@ -699,7 +697,31 @@ $("#department-select").html(departmentOptionHtml());
 
 
         $("#member_tbody").html(tmember);
-        $("#member").DataTable();
+        $("#member").DataTable({
+          ordering:false,
+          lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
+          scrollY:400,
+          scrollCollapse:true,
+          "oLanguage": {
+                    "sLengthMenu": "แสดง _MENU_ แถว ต่อหน้า",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sEmptyTable":     "ไม่มีข้อมูลในตาราง",
+                    "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
+                    "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 แถว",
+                    "sInfoFiltered": "(จากแถวทั้งหมด _MAX_ แถว)",
+                    "sSearch": "ค้นหา :",
+                    "oPaginate": {
+                                "sFirst":    "หน้าแรก",
+                                "sPrevious": "ก่อนหน้า",
+                                "sNext":     "ถัดไป",
+                                "sLast":     "หน้าสุดท้าย"
+                                  },
+                    "oAria": {
+                                "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+                              }
+                  }
+        });
 
 
       }, "JSON");
