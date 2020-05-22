@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
   $("#storeAdd_button").click(function() {
     link('control/store_add.php', '#home', '#topic', menu("parts","l1"), '#bread');
   });
@@ -10,29 +11,20 @@ $(document).ready(function() {
   $("#category-select").html(categoryHtml());
 
 
-$("#table_store").append(table());
+$("#table_store").append(table(getLoginLevel()));
                   datatables();
 
 
   $("#category-select").change(function () {
     var spcategory_id = $("#category-select option:selected").val();
     $("#table_store").empty();
-    $("#table_store").append(showStore(spcategory_id));
+    $("#table_store").append(showStore(spcategory_id,getLoginLevel()));
                               datatables();
 
   });
 
-  function table() {
+  function table(level) {
     var table="";
-
-    $.ajax({
-      url: 'control/ajax/ajax_store.php',
-      async: false,
-      type: 'post',
-      data: {
-        id: "get_loginlevel"
-      },
-      success: function (level) {
     table+="<table id='store_table' class='table table-bordered table-hover table-show'>"+
            "<thead>"+
            thead_tfoot(level)+
@@ -40,8 +32,7 @@ $("#table_store").append(table());
            "<tbody>"+
            "</tbody>"+
            "</table>";
-         }
-       });
+
     return table;
   }
 
@@ -71,20 +62,11 @@ $("#table_store").append(table());
     });
   }
 
-  function showStore(spcategory_id) {
+  function showStore(spcategory_id,level) {
     var table="";
     var a="";
 
-    $.ajax({
-      url: 'control/ajax/ajax_store.php',
-      async: false,
-      type: 'post',
-      data: {
-        id: "get_loginlevel"
-      },
-      success: function (level) {
-
-          $.ajax({
+            $.ajax({
             url:'control/ajax/ajax_store.php',
             async:false,
             type:'post',
@@ -127,9 +109,6 @@ $("#table_store").append(table());
             }
           });//end of get_store
 
-      }
-      });//end of get_loginlevel
-
     return table;
   }
 
@@ -164,6 +143,22 @@ $("#table_store").append(table());
     }
 
       return thead_tfoot;
+  }
+
+  function getLoginLevel() {
+    var level="";
+    $.ajax({
+      url: 'control/ajax/ajax_store.php',
+      async: false,
+      type: 'post',
+      data: {
+        id: "get_loginlevel"
+      },
+      success: function (response) {
+        level=response;
+      }
+    });
+    return level;
   }
 
 

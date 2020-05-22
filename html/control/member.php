@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-primary card-outline">
-      <div class="card-header">
+      <div class="card-header p-2">
         <h3 class="card-title mr-1" id="member_add_button">
           <i class="nav-icon fas fa-users"></i>
           ผู้ใช้งาน
@@ -18,7 +18,7 @@
 
       </div>
       <!-- /.card-header -->
-      <div class="card-body">
+      <div class="card-body p-1">
         <table id="member" class="table table-bordered table-hover table-show">
           <thead>
           <tr>
@@ -38,7 +38,7 @@
           <tbody id="member_tbody">
 
           </tbody>
-          
+
         </table>
       </div>
       <!-- /.card-body -->

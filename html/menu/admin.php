@@ -1,6 +1,5 @@
 
 <!-- Admin Menu  -->
-<li class="nav-header" id="take_pay_topic"></li>
 
     <li class="nav-item">
       <a href="#" class="nav-link" id="take_pay_js1">
@@ -8,10 +7,6 @@
         <p id="take_pay_topic1"></p>
       </a>
     </li>
-
-
-
-    <li class="nav-header" id="parts_header"></li>
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">

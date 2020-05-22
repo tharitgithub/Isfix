@@ -700,8 +700,6 @@ if($(this).is(':checked')){
         $("#member").DataTable({
           ordering:false,
           lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
-          scrollY:400,
-          scrollCollapse:true,
           "oLanguage": {
                     "sLengthMenu": "แสดง _MENU_ แถว ต่อหน้า",
                     "sZeroRecords": "ไม่พบข้อมูล",
