@@ -141,7 +141,7 @@ if (!isset($_SESSION["checklogin"])) {
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid" id="home">
+      <div class="container-fluid p-0" id="home">
         <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-lg-3 col-6">
