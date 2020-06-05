@@ -24,7 +24,6 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
       $this->passDB="";
       $this->dbname="isfix";
       */
-
       $this->con = new mysqli($this->host,$this->userDB,$this->passDB,$this->dbname);
       $this->con->set_charset("utf8");
     }

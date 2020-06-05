@@ -11,7 +11,7 @@
       <!-- /.card-header -->
       <!-- form start -->
       <form action="" id="member_add-form" autocomplete="off" action="">
-        <div class="card-body">
+        <div class="card-body p-2">
 
           <div class="row">
 
@@ -112,7 +112,7 @@
         </div>
         <!-- /.card-body -->
 
-        <div class="card-footer">
+        <div class="card-footer p-2">
           <button class="btn btn-primary"><i class="fas fa-check-circle mr-1"></i>ตกลง</button>
         </div>
       </form>

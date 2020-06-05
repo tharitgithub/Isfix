@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
   $("#storeAdd_button").click(function() {
     link('control/store_add.php', '#home', '#topic', menu("parts","l1"), '#bread');
   });
