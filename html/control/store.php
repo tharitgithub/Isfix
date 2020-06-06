@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-primary card-outline p-0">
-      <div class="card-header p-2">
+      <div class="card-header p-1">
         <div class="card-tile">
           <div class="row">
             <div class="col-6">
@@ -23,12 +23,8 @@
         </div>
 
       </div>
-      <div class="card-body p-1">
-        <div class="row">
-          <div class="col-sm-12" id="table_store">
+      <div class="card-body table-responsive p-0" id="table_store">
 
-          </div>
-        </div>
       </div>
       <!-- /.card-body -->
     </div>

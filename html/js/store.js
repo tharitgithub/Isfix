@@ -10,7 +10,7 @@ $(document).ready(function() {
   $("#category-select").html(categoryHtml());
 
 
-$("#table_store").append(table(getLoginLevel()));
+  $("#table_store").append(table(getLoginLevel()));
                   datatables();
 
 
@@ -24,7 +24,7 @@ $("#table_store").append(table(getLoginLevel()));
 
   function table(level) {
     var table="";
-    table+="<table id='store_table' class='table table-bordered table-hover table-show'>"+
+    table+="<table id='store_table' class='table table-hover text-nowrap table-show'>"+
            "<thead>"+
            thead_tfoot(level)+
            "</thead>"+
@@ -73,7 +73,7 @@ $("#table_store").append(table(getLoginLevel()));
             dataType:'json',
             success: function (response) {
                 var no=1;
-                table+="<table id='store_table' class='table table-bordered table-hover table-show'>"+
+                table+="<table id='store_table' class='table table-hover text-nowrap table-show'>"+
                        "<thead>"+
                        thead_tfoot(level)+
                        "</thead>"+

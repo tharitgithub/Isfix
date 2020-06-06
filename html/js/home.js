@@ -4,48 +4,43 @@ $(document).ready(function() {
 
   $('#parts_js1').click(function() {
 
-    link('control/store.php', '#home', '#topic', menu["parts"]["l1"], '#bread');
-
+    link('control/store.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["parts"]["l1"], '#bread');
+menu["parts"]["l1"]
   });
 
   $('#parts_js2').click(function() {
 
-    link('control/category.php', '#home', '#topic', menu["parts"]["l2"], '#bread');
+    link('control/category.php', '#home', '#topic', menu["parts"]["l2"], "<i class='nav-icon fas fa-th-list mr-1'></i>"+menu["parts"]["l2"], '#bread');
 
   });
 
   $('#parts_js3').click(function() {
 
-    link('control/spname.php', '#home', '#topic', menu["parts"]["l3"], '#bread');
+    link('control/spname.php', '#home', '#topic', menu["parts"]["l3"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l3"],'#bread');
 
   });
+
   $('#parts_js4').click(function() {
 
-    link('control/sptype.php', '#home', '#topic', menu["parts"]["l4"], '#bread');
+    link('control/brand.php', '#home', '#topic', menu["parts"]["l4"], "<i class='nav-icon fas fa-band-aid mr-1'></i>"+menu["parts"]["l4"],'#bread');
 
   });
 
   $('#parts_js5').click(function() {
 
-    link('control/dump.php', '#home', '#topic', menu["parts"]["l5"], '#bread');
+    link('control/dump.php', '#home', '#topic', menu["parts"]["l5"], "<i class='nav-icon fas fa-bars mr-1'></i>"+menu["parts"]["l5"],'#bread');
 
   });
 
   $('#parts_js6').click(function() {
 
-    link('control/brand.php', '#home', '#topic', menu["parts"]["l6"], '#bread');
-
-  });
-
-  $('#parts_js7').click(function() {
-
-    link('control/budget_year.php', '#home', '#topic', menu["parts"]["l7"], '#bread');
+    link('control/budget_year.php', '#home', '#topic', menu["parts"]["l6"], "<i class='nav-icon fas fa-calendar-alt mr-1'></i>"+menu["parts"]["l6"], '#bread');
 
   });
 
   $('#member_js').click(function() {
 
-    link('control/member.php', '#home', '#topic', menu["member"]["l1"], '#bread');
+    link('control/member.php', '#home', '#topic', menu["member"]["l1"], "<i class='nav-icon fas fa-users mr-1'></i>"+menu["member"]["l1"],'#bread');
 
   });
 
@@ -92,7 +87,6 @@ function menu() {
       $("#parts_topic4").text(menu["parts"]["l4"]);
       $("#parts_topic5").text(menu["parts"]["l5"]);
       $("#parts_topic6").text(menu["parts"]["l6"]);
-      $("#parts_topic7").text(menu["parts"]["l7"]);
 
       $("#member_header").text(menu["member"]["header"]);
       $("#member_topic1").text(menu["member"]["l1"]);
@@ -100,8 +94,9 @@ function menu() {
   });
 }
 
-function link(file, area1, area2, text, bread) {
-  $(area2).text(text);
+function link(file, area1, area2, text, htmlIcon, bread) {
+  $(area2).empty();
+  $(area2).append(htmlIcon);
   $(area1).empty();
   $(area1).html('');
   $(bread).text(text);

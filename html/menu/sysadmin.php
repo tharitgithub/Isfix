@@ -18,44 +18,38 @@
         <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="#" class="nav-link" id="parts_js1">
-              <i class="nav-icon fas fa-circle"></i>
+              <i class="nav-icon fas fa-store"></i>
               <p id="parts_topic1"></p>
             </a>
           </li>
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js2">
-            <i class="nav-icon fas fa-circle"></i>
+            <i class="nav-icon fas fa-th-list"></i>
             <p id="parts_topic2"></p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js3">
-            <i class="nav-icon fas fa-circle"></i>
+            <i class="nav-icon fas fa-layer-group"></i>
             <p id="parts_topic3"></p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js4">
-            <i class="nav-icon fas fa-circle"></i>
+            <i class="nav-icon fas fa-band-aid"></i>
             <p id="parts_topic4"></p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js5">
-            <i class="nav-icon fas fa-circle"></i>
+            <i class="nav-icon fas fa-bars"></i>
             <p id="parts_topic5"></p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js6">
-            <i class="nav-icon fas fa-circle"></i>
+            <i class="nav-icon fas fa-calendar-alt"></i>
             <p id="parts_topic6"></p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link" id="parts_js7">
-            <i class="nav-icon fas fa-circle"></i>
-            <p id="parts_topic7"></p>
           </a>
         </li>
         </ul>
