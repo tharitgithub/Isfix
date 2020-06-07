@@ -1,29 +1,130 @@
 $(document).ready(function() {
 
-  onSelect();
-
-});
-
-function onSelect() {
   $("#category-select").html(categoryHtml());
   $("#category-select").change(function() {
       var spcategory_id = $("#category-select option:selected").val();
       $("#spname-select").html(spnameHtml(spcategory_id));
       //$("#spname-select").empty();
-      $("#add_table_sptype").empty();
+      //$("#add_table_sptype").empty();
       //$("#add_table_sptype").append(spnameHtml(spcategory_id,"table"));
   });
 
   $("#spname-select").change(function() {
       var spname_id = $("#spname-select option:selected").val();
-      $("#add_table_sptype").empty();
-      $("#add_table_sptype").append(sptypeHtml(spname_id,"table"));
-      $("#sptype_table").DataTable();
-
+      $("#table_sptype").empty();
+      $("#table_sptype").append(showSptype(spname_id,getLoginLevel()));
+                              datatables();
   });
 
+  $("#table_sptype").append(table(getLoginLevel()));
+                  datatables();
 
+
+  function table(level) {
+    var table="";
+    table+="<table id='sptype_table' class='table table-hover text-nowrap table-show'>"+
+           "<thead>"+
+           thead_tfoot(level)+
+           "</thead>"+
+           "<tbody>"+
+           "</tbody>"+
+           "</table>";
+
+    return table;
+  }
+
+  function datatables() {
+    $("#sptype_table").DataTable({
+      ordering:false,
+      lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
+      "oLanguage": {
+                "sLengthMenu": "แสดง _MENU_ แถว ต่อหน้า",
+                "sZeroRecords": "ไม่พบข้อมูล",
+                "sEmptyTable":     "ไม่มีข้อมูลในตาราง",
+                "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
+                "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 แถว",
+                "sInfoFiltered": "(จากแถวทั้งหมด _MAX_ แถว)",
+                "sSearch": "ค้นหา :",
+                "oPaginate": {
+                            "sFirst":    "หน้าแรก",
+                            "sPrevious": "ก่อนหน้า",
+                            "sNext":     "ถัดไป",
+                            "sLast":     "หน้าสุดท้าย"
+                              },
+                "oAria": {
+                            "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                            "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+                          }
+              }
+    });
+  }
+
+
+function showSptype(spname_id,level) {
+  var sptypeHtml="";
+
+  $.ajax({
+    url: 'control/ajax/ajax_sptype.php',
+    async: false,
+    type: 'post',
+    data: {
+      id: "get_sptype",
+      spname_id:spname_id
+    },
+    dataType: 'json',
+    success: function (output) {
+       var no=1;
+
+        sptypeHtml+="<table id='sptype_table' class='table table-hover text-nowrap table-show'>"+
+              "<thead>"+
+              "<tr>"+
+              thead_tfoot(level)+
+              "</tr>"+
+              "</thead>"+
+              "<tbody>";
+
+              $.each(output.sptype,
+                function(index,value) {
+                  sptypeHtml += "<tr>"+
+                                 "<td class='text-center'>"+ (no++) +"</td>"+
+                                 "<td class='text-left'>"+value.sptype_name+"</td>"+
+                                 "<td class='text-center'>"+
+                                 "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.sptype_id + "'><i class='fas fa-edit mr-1'></i>แก้ไข</a>"+
+                                 "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.sptype_id + "'><i class='fas fa-trash mr-1'></i>ลบ</a>"+
+                                 "</td>"+
+                                "</tr>";
+                   });
+
+        sptypeHtml+="</tbody>"+
+                    "</table>";
+
+    }
+  });
+
+  return sptypeHtml;
 }
+
+function thead_tfoot(level) {
+  var thead_tfoot="";
+  if (level!="OFFICER") {
+    thead_tfoot+="<tr class='text-left'>";
+    thead_tfoot+="<th class='text-center'>#</th>";
+    thead_tfoot+="<th width='20%'>รายการ</th>";
+    if (level=="SysADMIN") {
+      thead_tfoot+="<th class='text-center'>จัดการ</th>";
+    }
+    thead_tfoot+="</tr>";
+  }else {
+    thead_tfoot+="<tr class='text-left'>";
+    thead_tfoot+="<th class='text-center'>#</th>";
+    thead_tfoot+="<th width='20%'>รายการ</th>";
+    thead_tfoot+="</tr>";
+  }
+
+    return thead_tfoot;
+}
+
+
 
 function categoryHtml() {
   var categoryHtml="";
@@ -62,7 +163,7 @@ function spnameHtml(spcategory_id) {
     },
     dataType: 'json',
     success: function (output) {
-      spnameHtml += "<option disabled='disabled' selected='selected'>กรุณาเลือกตระกูล</option>";
+      spnameHtml += "<option disabled='disabled' selected='selected'>กรุณาเลือกหมวดหมู่</option>";
 
       $.each(output.spname,
         function(index,value) {
@@ -75,67 +176,36 @@ function spnameHtml(spcategory_id) {
   return spnameHtml;
 }
 
-function sptypeHtml(spname_id,code) {
-  var sptypeHtml="";
-
+function getLoginLevel() {
+  var level="";
   $.ajax({
-    url: 'control/ajax/ajax_sptype.php',
+    url: 'control/ajax/ajax_store.php',
     async: false,
     type: 'post',
     data: {
-      id: "get_sptype",
-      spname_id:spname_id
+      id: "get_loginlevel"
     },
-    dataType: 'json',
-    success: function (output) {
-       var no=1;
-      if (code=="option") {
-        sptypeHtml += "<option disabled='disabled' selected='selected'>กรุณาเลือกชนิด</option>";
-
-        $.each(output.sptype,
-          function(index,value) {
-            sptypeHtml += "<option value='"+value.sptype_id+"'>"+value.sptype_name+"</option>";
-        });
-      }else {
-
-        sptypeHtml+="<table id='sptype_table' class='table table-bordered table-hover table-show'>"+
-              "<thead class='highlight'>"+
-              "<tr>"+
-              "<th class='text-center'>#</th>"+
-              "<th class='text-left'>รายการ</th>"+
-              "<th class='text-center'>จัดการ</th>"+
-              "</tr>"+
-              "</thead>"+
-
-              "<tbody>";
-
-              $.each(output.sptype,
-                function(index,value) {
-                  sptypeHtml += "<tr>"+
-                                 "<td class='text-center' width='5%'>"+ (no++) +"</td>"+
-                                 "<td class='text-left'>"+value.sptype_name+"</td>"+
-                                 "<td class='text-center' width='20%'>"+
-                                 "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.sptype_id + "'><i class='fas fa-edit mr-1'></i>แก้ไข</a>"+
-                                 "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.sptype_id + "'><i class='fas fa-trash mr-1'></i>ลบ</a>"+
-                                 "</td>"+
-                                "</tr>";
-              });
-
-        sptypeHtml+="</tbody>";
-
-
-        sptypeHtml+="<tfoot>"+
-                     "<tr>"+
-                     "<th class='text-center'>#</th>"+
-                     "<th class='text-left'>รายการ</th>"+
-                     "<th class='text-center'>จัดการ</th>"+
-                     "</tr>"+
-                   "</tfoot>"+
-            "</table>";
-      }
-
+    success: function (response) {
+      level=response;
     }
   });
-
-  return sptypeHtml;
+  return level;
 }
+
+function menu() {
+
+$.ajax({
+  url: 'control/topic_menu.php',
+  async: false,
+  data: {ID:"menu"},
+  type: 'post',
+  dataType: 'json',
+  success: function(output) {
+
+    menu = output.menu;
+  }
+});
+}
+
+
+});

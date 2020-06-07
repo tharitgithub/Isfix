@@ -12,7 +12,7 @@
         </h3>
         <div class="card-tools">
           <div class="input-group">
-              <a class='btn bg-gradient-success mr-2' href="#" id="category-add"><i class="fas fa-plus mr-1"></i>เพิ่มรายการ</a>
+              <a class='btn bg-gradient-success mr-2' href="#" id="categoryAdd_button"><i class="fas fa-plus mr-1"></i>เพิ่มรายการ</a>
           </div>
         </div>
 

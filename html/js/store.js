@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
   $("#storeAdd_button").click(function() {
-    link('control/store_add.php', '#home', '#topic', menu("parts","l1"), '#bread');
+    menu();
+    link('control/store_add.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["parts"]["l1"], '#bread');
   });
 
   $("#spname-select").html(spnameHtml());
   $("#sptype-select").html(sptypeHtml());
   $("#budget-select").html(budgetHtml());
   $("#category-select").html(categoryHtml());
-
 
   $("#table_store").append(table(getLoginLevel()));
                   datatables();
@@ -336,10 +336,7 @@ $(document).ready(function() {
     return optionsptype;
   }
 
-
-
-  function menu(topic,list) {
-    var text="";
+  function menu() {
 
   $.ajax({
     url: 'control/topic_menu.php',
@@ -350,12 +347,8 @@ $(document).ready(function() {
     success: function(output) {
 
       menu = output.menu;
-
-      text=menu[topic][list];
     }
   });
-
-    return text;
   }
 
 });

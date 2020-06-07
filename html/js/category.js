@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  $("#storeAdd_button").click(function() {
-    link('control/category_add.php', '#home', '#topic', menu("parts","l1"), '#bread');
+  $("#categoryAdd_button").click(function() {
+    menu();
+    link('control/category_add.php', '#home', '#topic', menu["parts"]["l2"], "<i class='nav-icon fas fa-th-list mr-1'></i>"+menu["parts"]["l2"], '#bread');
   });
 
   $("#table_category").append(showCategory(getLoginLevel()));
@@ -115,8 +116,7 @@ $(document).ready(function() {
     return level;
   }
 
-  function menu(topic,list) {
-    var text="";
+  function menu() {
 
   $.ajax({
     url: 'control/topic_menu.php',
@@ -127,12 +127,8 @@ $(document).ready(function() {
     success: function(output) {
 
       menu = output.menu;
-
-      text=menu[topic][list];
     }
   });
-
-    return text;
   }
 
 });

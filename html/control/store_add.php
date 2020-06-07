@@ -18,7 +18,7 @@
         <div class="col-sm-5">
           <div class="form-group">
             <label>Part Number</label>
-            <input type="text" class="form-control" name="serial_number" id="serial-number" disabled="disabled">
+            <input type="text" class="form-control form-control" name="serial_number" id="serial-number" disabled="disabled">
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>ตระกูล</label>
-            <select class="form-control" name="spname_select" id="spname-select" style="width: 100%;">
+            <select class="form-control form-control" name="spname_select" id="spname-select" style="width: 100%;">
 
             </select>
           </div>

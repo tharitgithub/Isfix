@@ -18,8 +18,8 @@
 
       </div>
       <!-- /.card-header -->
-      <div class="card-body p-1">
-        <table id="member" class="table table-bordered table-hover table-show">
+      <div class="card-body table-responsive p-0">
+        <table id="member" class="table table-hover text-nowrap table-show">
           <thead>
           <tr>
             <th>#</th>

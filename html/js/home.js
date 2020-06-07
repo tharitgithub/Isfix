@@ -2,23 +2,31 @@ $(document).ready(function() {
 
   menu();
 
+  $('#store_js').click(function() {
+
+    link('control/store.php', '#home', '#topic', menu["store"]["header"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["store"]["header"], '#bread');
+
+  });
+
+
   $('#parts_js1').click(function() {
 
-    link('control/store.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["parts"]["l1"], '#bread');
-menu["parts"]["l1"]
+    link('control/category.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l1"], '#bread');
+
   });
 
   $('#parts_js2').click(function() {
 
-    link('control/category.php', '#home', '#topic', menu["parts"]["l2"], "<i class='nav-icon fas fa-th-list mr-1'></i>"+menu["parts"]["l2"], '#bread');
+    link('control/spname.php', '#home', '#topic', menu["parts"]["l2"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l2"],'#bread');
 
   });
 
   $('#parts_js3').click(function() {
 
-    link('control/spname.php', '#home', '#topic', menu["parts"]["l3"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l3"],'#bread');
+    link('control/sptype.php', '#home', '#topic', menu["parts"]["l3"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l3"], '#bread');
 
   });
+
 
   $('#parts_js4').click(function() {
 
@@ -28,7 +36,7 @@ menu["parts"]["l1"]
 
   $('#parts_js5').click(function() {
 
-    link('control/dump.php', '#home', '#topic', menu["parts"]["l5"], "<i class='nav-icon fas fa-bars mr-1'></i>"+menu["parts"]["l5"],'#bread');
+    link('control/dump.php', '#home', '#topic', menu["parts"]["l5"], "<i class='nav-icon fas fa-th-list mr-1'></i>"+menu["parts"]["l5"],'#bread');
 
   });
 
@@ -40,7 +48,7 @@ menu["parts"]["l1"]
 
   $('#member_js').click(function() {
 
-    link('control/member.php', '#home', '#topic', menu["member"]["l1"], "<i class='nav-icon fas fa-users mr-1'></i>"+menu["member"]["l1"],'#bread');
+    link('control/member.php', '#home', '#topic', menu["member"]["header"], "<i class='nav-icon fas fa-users mr-1'></i>"+menu["member"]["header"],'#bread');
 
   });
 
@@ -75,12 +83,11 @@ function menu() {
     dataType: 'json',
     success: function(output) {
       menu = output.menu;
-      $("#take_pay_topic").text(menu["take_pay"]["topic"]);
-      $("#take_pay_topic1").text(menu["take_pay"]["l1"]);
+      $("#take_pay_topic").text(menu["take_pay"]["header"]);
 
+      $("#store_header").text(menu["store"]["header"]);
 
-      $("#parts_header").text(menu["parts"]["header"]);
-      $("#parts_topic").text(menu["parts"]["topic"]);
+      $("#parts_topic").text(menu["parts"]["header"]);
       $("#parts_topic1").text(menu["parts"]["l1"]);
       $("#parts_topic2").text(menu["parts"]["l2"]);
       $("#parts_topic3").text(menu["parts"]["l3"]);
@@ -89,7 +96,6 @@ function menu() {
       $("#parts_topic6").text(menu["parts"]["l6"]);
 
       $("#member_header").text(menu["member"]["header"]);
-      $("#member_topic1").text(menu["member"]["l1"]);
     }
   });
 }
