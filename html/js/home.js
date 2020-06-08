@@ -8,7 +8,6 @@ $(document).ready(function() {
 
   });
 
-
   $('#parts_js1').click(function() {
 
     link('control/category.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l1"], '#bread');

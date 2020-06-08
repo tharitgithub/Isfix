@@ -85,8 +85,8 @@ function showSpname(spcategory_id,level) {
 
                       if(level=="SysADMIN"){
                       spnameHtml+="<td class='text-center' width='0%'>"+
-                                  "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.spname_id + "'><i class='fas fa-edit mr-1'></i>แก้ไข</a>"+
-                                  "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.spname_id + "'><i class='fas fa-trash mr-1'></i>ลบ</a>"+
+                                  "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.spname_id + "'><i class='fas fa-edit'></i></a>"+
+                                  "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.spname_id + "'><i class='fas fa-trash'></i></a>"+
                                   "</td>";
                                 }
 
@@ -105,16 +105,16 @@ function thead_tfoot(level) {
   var thead_tfoot="";
   if (level!="OFFICER") {
     thead_tfoot+="<tr class='text-left'>";
-    thead_tfoot+="<th class='text-center'>#</th>";
-    thead_tfoot+="<th width='20%'>รายการ</th>";
+    thead_tfoot+="<th width='30%' class='text-center'>#</th>";
+    thead_tfoot+="<th>รายการ</th>";
     if (level=="SysADMIN") {
       thead_tfoot+="<th class='text-center'>จัดการ</th>";
     }
     thead_tfoot+="</tr>";
   }else {
     thead_tfoot+="<tr class='text-left'>";
-    thead_tfoot+="<th class='text-center'>#</th>";
-    thead_tfoot+="<th width='20%'>รายการ</th>";
+    thead_tfoot+="<th width='30%' class='text-center'>#</th>";
+    thead_tfoot+="<th>รายการ</th>";
     thead_tfoot+="</tr>";
   }
 

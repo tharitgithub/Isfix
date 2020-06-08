@@ -15,8 +15,8 @@ if (isset($_POST["id"])) {
     $showCategory = $CATEGORY->showCategory();
     $getJson = $CATEGORY->getJson($showCategory);
     echo $getJson;
-  }elseif ($id=="store_add") {
-    return  $CATEGORY->storeAdd($_POST["serial_number"],$_POST["spname_select"],$_POST["sptype_select"],$_POST["part_detail"],$_POST["category_select"],$_POST["purchasing_amount_number"],$_POST["budget"],$_POST["dump"]);
+  }elseif ($id=="category_add") {
+    return  $CATEGORY->categoryAdd($_POST["category"]);
   }else {
     // code...
   }

@@ -10,7 +10,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form action="" id="member_add-form" autocomplete="off" action="">
+      <form id="member_add-form" autocomplete="off">
         <div class="card-body p-2">
 
           <div class="row">

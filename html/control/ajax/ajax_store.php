@@ -12,16 +12,17 @@ if (isset($_POST["id"])) {
   if ($id=="get_loginlevel") {
     echo $_SESSION["userlevel"];
   }elseif ($id=="get_store") {
-    $spcategory_id = $_POST["spcategory_id"];
-    $showStore = $STORE->showStore($spcategory_id);
+    $id_key = $_POST["id_key"];
+    $key = $_POST["key"];
+    $showStore = $STORE->showStore($id_key,$key);
     $getJson = $STORE->getJson($showStore);
     echo $getJson;
   }elseif ($id=="get_spname") {
-    $result = $STORE->getSpname();
+    $result = $STORE->getSpname($_POST["spcategory_id"]);
     $getJson = $STORE->getJson($result);
     echo $getJson;
   }elseif($id=="get_sptype"){
-    $result = $STORE->getSptype();
+    $result = $STORE->getSptype($_POST["spname_id"]);
     $getJson = $STORE->getJson($result);
     echo $getJson;
   }elseif ($id=="get_category") {
@@ -30,6 +31,10 @@ if (isset($_POST["id"])) {
     echo $getJson;
   }elseif ($id=="get_budget") {
     $result = $STORE->getBudget();
+    $getJson = $STORE->getJson($result);
+    echo $getJson;
+  }elseif ($id=="get_dump") {
+    $result = $STORE->getDump();
     $getJson = $STORE->getJson($result);
     echo $getJson;
   }elseif ($id=="store_add") {

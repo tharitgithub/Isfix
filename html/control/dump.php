@@ -7,17 +7,17 @@
 
 
         <h3 class="card-title mr-1">
-          <i class="nav-icon fas fa-layer-group"></i>
-          ประเภท
+          <i class="nav-icon fas fa-th-list"></i>
+          ที่เก็บ
         </h3>
         <div class="card-tools">
           <div class="input-group">
-              <a class='btn bg-gradient-success mr-2' href="#" id="categoryAdd_button"><i class="fas fa-plus mr-1"></i>เพิ่มรายการ</a>
+              <a class='btn bg-gradient-success mr-2' href="#" id="dumpAdd_button"><i class="fas fa-plus mr-1"></i>เพิ่มรายการ</a>
           </div>
         </div>
 
       </div>
-      <div class="card-body table-responsive p-0" id="table_category">
+      <div class="card-body table-responsive p-0" id="table_dump">
 
       </div>
       <!-- /.card-body -->
@@ -28,4 +28,4 @@
 </div>
 <!-- /.row  -->
 
-<script src="js/category.js" type="text/javascript"></script>
+<script src="js/dump.js" type="text/javascript"></script>

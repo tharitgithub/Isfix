@@ -4,7 +4,7 @@
   <div class="col-12">
     <div class="card card-primary card-outline">
       <div class="card-header p-2">
-        <h3 class="card-title mr-1" id="member_add_button">
+        <h3 class="card-title mr-1">
           <i class="nav-icon fas fa-users"></i>
           ผู้ใช้งาน
         </h3>

@@ -1,16 +1,14 @@
 $(document).ready(function() {
-  $("#categoryAdd_button").click(function() {
+  $("#budget_yearAdd_button").click(function() {
     menu();
-    link('control/category_add.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-layer-group mr-1'></i>"+menu["parts"]["l1"], '#bread');
+    link('control/bud_year_add.php', '#home', '#topic', menu["parts"]["l6"], "<i class='nav-icon fas fa-calendar-alt mr-1'></i>"+menu["parts"]["l6"], '#bread');
   });
 
-  $("#table_category").append(showCategory(getLoginLevel()));
+  $("#table_budget_year").append(showBudget_year(getLoginLevel()));
                   datatables();
 
-
-
   function datatables() {
-    $("#category_table").DataTable({
+    $("#budget_year_table").DataTable({
       ordering:false,
       lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
       "oLanguage": {
@@ -35,33 +33,33 @@ $(document).ready(function() {
     });
   }
 
-  function showCategory(level) {
+  function showBudget_year(level) {
     var table="";
     var a="";
 
             $.ajax({
-            url:'control/ajax/ajax_category.php',
+            url:'control/ajax/ajax_budget_year.php',
             async:false,
             type:'post',
-            data:{id:"get_category"},
+            data:{id:"get_budget_year"},
             dataType:'json',
             success: function (response) {
                 var no=1;
-                table+="<table id='category_table' class='table table-hover text-nowrap table-show'>"+
+                table+="<table id='budget_year_table' class='table table-hover text-nowrap table-show'>"+
                        "<thead>"+
                        thead_tfoot(level)+
                        "</thead>"+
                        "<tbody>";
-             $.each(response.category,
+             $.each(response.budget_year,
               function(index,value) {
               table += "<tr>"+
                             "<td class='text-center'>"+ (no++) +"</td>"+
-                            "<td class='text-left'>"+value.spcategory_name+"</td>";
+                            "<td class='text-left'>"+value.budgety_code+"</td>";
 
                   if (level=="SysADMIN") {
                      table+="<td class='text-center'>"+
-                            "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.spcategory_id + "'><i class='fas fa-edit'></i></a>"+
-                            "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.spcategory_id + "'><i class='fas fa-trash'></i></a>"+
+                            "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.budget_id + "'><i class='fas fa-edit'></i></a>"+
+                            "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.budget_id + "'><i class='fas fa-trash'></i></a>"+
                             "</td>";
                             }
 
@@ -82,7 +80,7 @@ $(document).ready(function() {
     var thead_tfoot="";
     if (level!="OFFICER") {
       thead_tfoot+="<tr class='text-left'>";
-      thead_tfoot+="<th  width='30%' class='text-center'>#</th>";
+      thead_tfoot+="<th width='30%' class='text-center'>#</th>";
       thead_tfoot+="<th>รายการ</th>";
       if (level=="SysADMIN") {
         thead_tfoot+="<th class='text-center'>จัดการ</th>";
@@ -100,69 +98,10 @@ $(document).ready(function() {
   }
 
 
-  $("#category_add-form").submit(function(e) {
-    e.preventDefault();
-     var category = $("#category").val();
-
-     $.post("control/ajax/ajax_category.php",
-     {
-       id:"category_add",
-       category:category
-     },
-     function(data) {
-
-       Swal.fire({
-         title: 'กำลังดำเนินการ',
-         timer: 2000,
-         timerProgressBar: true,
-         onBeforeOpen: () => {
-           Swal.showLoading()
-           timerInterval = setInterval(() => {
-             const content = Swal.getContent()
-             if (content) {
-               const b = content.querySelector('b')
-               if (b) {
-                 b.textContent = Swal.getTimerLeft()
-               }
-             }
-           }, 100)
-         },
-         onClose: () => {
-           clearInterval(timerInterval)
-         }
-       }).then((result) => {
-
-         if (data==3) {
-           Swal.fire({
-             title: "บันทึกข้อมูลสำเร็จ",
-             icon: 'success',
-             timer: 1500,
-             showConfirmButton: false
-           })
-         }else {
-           Swal.fire({
-             title: 'บันทึกข้อมูลไม่สำเร็จ',
-             icon: 'error',
-             timer: 1500,
-             showConfirmButton: false
-           })
-         }
-
-       })
-
-     });
-
-     setTimeout(function() {
-           location.href = "home";
-           //link('control/member.php', '#home', '#topic', "เพิ่มผู้ใช้งาน", '#bread');
-       }, 4000);
-
-  });
-
   function getLoginLevel() {
     var level="";
     $.ajax({
-      url: 'control/ajax/ajax_store.php',
+      url: 'control/ajax/ajax_budget_year.php',
       async: false,
       type: 'post',
       data: {

@@ -6,9 +6,9 @@
       <div class="card-header p-1">
         <div class="card-tile">
           <div class="row">
-            <div class="col-6">
+            <div class="col-10">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">ประเภท</label>
+                <label class="col-sm-2 col-form-label text-right">ประเภท</label>
                 <div class="col-sm-10">
                   <select class="form-control" name="category_select" id="category-select" style="width: 100%;">
 
@@ -16,7 +16,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-2">
               <button class='btn btn-success mr-1' href='#' id='spnameAdd_button'><i class='fas fa-plus mr-1'></i>เพิ่มรายการ</button>
             </div>
           </div>

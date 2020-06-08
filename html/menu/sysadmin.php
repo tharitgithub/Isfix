@@ -41,12 +41,14 @@
             <p id="parts_topic3"></p>
           </a>
         </li>
+        <!--
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js4">
             <i class="nav-icon fas fa-band-aid"></i>
             <p id="parts_topic4"></p>
           </a>
         </li>
+      -->
         <li class="nav-item">
           <a href="#" class="nav-link" id="parts_js5">
             <i class="nav-icon fas fa-th-list"></i>

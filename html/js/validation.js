@@ -24,6 +24,31 @@ $(document).ready(function() {
       }
   });
 
+  $("#category_add-form").validate({
+    rules: {
+      category:{
+        required:true
+      }
+    },
+    messages:{
+      category:{
+        required:"ประเภท ต้องไม่ว่างเปล่า"
+      }
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+
+  });
+
 
   $("#member_add-form").validate({
 

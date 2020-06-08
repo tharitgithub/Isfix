@@ -208,8 +208,6 @@ if($(this).is(':checked')){
       $("#level").val(label);
       $("#user_id").val(user_id);
 
-
-
   });
 
   $("#save_permise_Change").click(function (e) {
@@ -405,7 +403,8 @@ if($(this).is(':checked')){
       $("#user_id").val(user_id);
     });
 
-  $(document).on("submit","#password-confirm-form",function() {
+  $(document).on("submit","#password-confirm-form",function(e) {
+    e.preventDefault();
     var user_id = $("#user_id").val();
     var password = $("#password-confirm").val();
     Swal.fire({
@@ -444,7 +443,6 @@ if($(this).is(':checked')){
               user_id:user_id
             },function(data) {
 
-              showMember();
 
               Swal.fire({
                 title: "ดำเนินการสำเร็จ",
@@ -454,6 +452,9 @@ if($(this).is(':checked')){
               })
 
               $("#password_confirm").modal("toggle");
+
+              showMember();
+
             });
           }else {
             Swal.fire({
@@ -470,12 +471,13 @@ if($(this).is(':checked')){
 
     })
 
-    return false;
+    //return false;
 
   });
 
 
-  $(document).on("submit","#member_add-form",function() {
+  $(document).on("submit","#member_add-form",function(e) {
+    e.preventDefault();
      var usermame = $("#username-member").val();
      var password = $("#password-member").val();
      var rank = $("#rank-select").val();
@@ -551,7 +553,7 @@ if($(this).is(':checked')){
 
      //location.href = "home";
 
-     return false;
+     //return false;
   });
 
 
@@ -697,32 +699,36 @@ if($(this).is(':checked')){
 
 
         $("#member_tbody").html(tmember);
-        $("#member").DataTable({
-          ordering:false,
-          lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
-          "oLanguage": {
-                    "sLengthMenu": "แสดง _MENU_ แถว ต่อหน้า",
-                    "sZeroRecords": "ไม่พบข้อมูล",
-                    "sEmptyTable":     "ไม่มีข้อมูลในตาราง",
-                    "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
-                    "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 แถว",
-                    "sInfoFiltered": "(จากแถวทั้งหมด _MAX_ แถว)",
-                    "sSearch": "ค้นหา :",
-                    "oPaginate": {
-                                "sFirst":    "หน้าแรก",
-                                "sPrevious": "ก่อนหน้า",
-                                "sNext":     "ถัดไป",
-                                "sLast":     "หน้าสุดท้าย"
-                                  },
-                    "oAria": {
-                                "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
-                                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
-                              }
-                  }
-        });
+        datatable();
 
 
       }, "JSON");
+  }
+
+  function datatable() {
+    $("#member").DataTable({
+      ordering:false,
+      lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
+      "oLanguage": {
+                "sLengthMenu": "แสดง _MENU_ แถว ต่อหน้า",
+                "sZeroRecords": "ไม่พบข้อมูล",
+                "sEmptyTable":     "ไม่มีข้อมูลในตาราง",
+                "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ แถว",
+                "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 แถว",
+                "sInfoFiltered": "(จากแถวทั้งหมด _MAX_ แถว)",
+                "sSearch": "ค้นหา :",
+                "oPaginate": {
+                            "sFirst":    "หน้าแรก",
+                            "sPrevious": "ก่อนหน้า",
+                            "sNext":     "ถัดไป",
+                            "sLast":     "หน้าสุดท้าย"
+                              },
+                "oAria": {
+                            "sSortAscending":  ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                            "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+                          }
+              }
+    });
   }
 
   function link(file, area1, area2, text, bread) {

@@ -34,19 +34,16 @@ class category extends dbconnect
      return $result;
   }
 
-  public function storeAdd($serial_number,$spname_select,$sptype_select,$part_detail,$category_select,$purchasing_amount_number,$budget,$dump)
+  public function categoryAdd($category)
   {
-    $sp_id = uniqid("spp-");
-    $i=2;
-    $spp_partnumber = sprintf('%04d', $i);
+    $sql="";
+    $spcategory_id = uniqid("spc-");
 
-    $spare_part = "INSERT INTO spare_part (sp_id,sptype_id,spp_partnumber,part_detail,budget_id,purchasing_amount,dump,part_qty,status)
-                        VALUES('".dbconnect::escapeString($sp_id)."','".dbconnect::escapeString($sptype_select)."','".dbconnect::escapeString($spp_partnumber)."',
-                              '".dbconnect::escapeString($part_detail)."','".dbconnect::escapeString($budget)."','$purchasing_amount_number',
-                              '".dbconnect::escapeString($dump)."','$purchasing_amount_number','have')";
+    $sql = "INSERT INTO spare_category (spcategory_id,spcategory_name)
+            VALUES('".dbconnect::escapeString($spcategory_id)."','".dbconnect::escapeString($category)."')";
 
     try {
-        dbconnect::dataQuery($spare_part);
+        dbconnect::dataQuery($sql);
 
         echo 3;
     } catch (Exception $e) {

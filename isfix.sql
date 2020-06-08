@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2020 at 08:16 AM
+-- Generation Time: Jun 08, 2020 at 01:55 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,7 +34,7 @@ CREATE TABLE `bill_lading` (
   `fix_id` varchar(20) NOT NULL,
   `dep_id` varchar(10) NOT NULL,
   `durable_num` varchar(50) NOT NULL,
-  `sp_id` int(11) NOT NULL,
+  `sp_id` varchar(20) NOT NULL,
   `qty` int(100) NOT NULL,
   `user_id` varchar(20) NOT NULL,
   `status` enum('approved','waitforapprove') NOT NULL
@@ -82,6 +82,24 @@ INSERT INTO `department` (`dep_id`, `dep_name`, `dep_short`, `org_id`) VALUES
 ('DEP1', 'แผนกซ่อมระบบคอมพิวเตอร์ กองซ่อมบำรุง สำนักปฏิบัติการ', 'ผ.ซ่อมระบบคอมพิวเตอร์ กซร.สปก.', 'G1'),
 ('DEP2', 'แผนกซ่อมระบบสื่อสารไร้สาย กองซ่อมบำรุง สำนักปฏิบัติการ', 'ผ.ซ่อมระบบสื่อสารไร้สาย กซร.สปก.', 'G1'),
 ('DEP3', 'แผนกซ่อมระบบสื่อสารทางสาย กองซ่อมบำรุง สำนักปฏิบัติการ', 'ผ.ซ่อมระบบสื่อสารทางสาย กซร.สปก.', 'G1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dump`
+--
+
+CREATE TABLE `dump` (
+  `dump_id` varchar(20) NOT NULL,
+  `dump_name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `dump`
+--
+
+INSERT INTO `dump` (`dump_id`, `dump_name`) VALUES
+('DU-5edcf14620255', 'กระซับแผนกซ่อมคอมฯ');
 
 -- --------------------------------------------------------
 
@@ -219,7 +237,8 @@ CREATE TABLE `spare_category` (
 
 INSERT INTO `spare_category` (`spcategory_id`, `spcategory_name`) VALUES
 ('spc-5ea469210eb96', 'อะไหล่คอมพิวเตอร์'),
-('spc-5ea46932f0ad8', 'เครื่องมือ');
+('spc-5ea46932f0ad8', 'เครื่องมือ'),
+('spc-5edd7d54b2f83', 'แม่เหล็ก');
 
 -- --------------------------------------------------------
 
@@ -274,7 +293,7 @@ CREATE TABLE `spare_part` (
   `serial_number` varchar(50) NOT NULL,
   `budget_id` varchar(20) NOT NULL,
   `purchasing_amount` int(11) NOT NULL,
-  `dump` varchar(100) DEFAULT NULL,
+  `dump_id` varchar(20) DEFAULT NULL,
   `take_out` int(11) NOT NULL,
   `part_qty` int(11) NOT NULL,
   `status` enum('have','outofstock') NOT NULL
@@ -284,29 +303,30 @@ CREATE TABLE `spare_part` (
 -- Dumping data for table `spare_part`
 --
 
-INSERT INTO `spare_part` (`sp_id`, `sptype_id`, `spp_partnumber`, `part_detail`, `serial_number`, `budget_id`, `purchasing_amount`, `dump`, `take_out`, `part_qty`, `status`) VALUES
-('spp-5ea536c3be3ae', 'spt-5ea53575d9662', '0001', 'INTEL', '', 'bgy-5ea463916d2e3', 20, NULL, 0, 20, 'have'),
-('spp-5ea581181f4c8', 'spt-5ea580459158d', '0001', '4 port USB 3.0 HUB', '', 'bgy-5ea463916d2e3', 5, NULL, 0, 5, 'have'),
-('spp-5ea5ca6015905', 'spt-5ea53575d9662', '0002', 'INTEL GEN5', '', 'bgy-5ea463916d2e3', 20, 'กระซับ แผนกซ่อมคอมฯ', 0, 20, 'have'),
-('spp-5ea5cb2d517c3', 'spt-5ea53575d9662', '0002', 'INTEL GEN5', '', 'bgy-5ea463916d2e3', 20, 'กระซับ แผนกซ่อมคอมฯ', 0, 20, 'have'),
-('spp-5ea5cc4259c0e', 'spt-5ea53575d9662', '0003', 'INTEL GEN7', '', 'bgy-5ea463916d2e3', 20, 'กระซับ', 0, 20, 'have'),
-('spp-5ea5cd1301b7a', 'spt-5ea53575d9662', '0003', 'INTEL GEN7', '', 'bgy-5ea463916d2e3', 20, 'กระซับ', 0, 20, 'have'),
-('spp-5ea5d13101db2', 'spt-5ea53575d9662', '0002', '0000000', '', 'bgy-5ea463916d2e3', 20, 'กระซับ แผนกซ่อมคอมฯ', 0, 20, 'have'),
-('spp-5ea826d06011c', 'spt-5ea53575d9662', '0002', 'gggg', '', 'bgy-5ea463916d2e3', 6, 'gggg', 0, 6, 'have'),
-('spp-5ea826d0611d6', 'spt-5ea53575d9662', '0002', 'gggg', '', 'bgy-5ea463916d2e3', 6, 'gggg', 0, 6, 'have'),
-('spp-5ea826ef70a08', 'spt-5ea53575d9662', '0002', 'g', '', 'bgy-5ea463916d2e3', 5, 'd', 0, 5, 'have'),
-('spp-5ea827131a193', 'spt-5ea53575d9662', '0002', 'f', '', 'bgy-5ea463916d2e3', 5, 's', 0, 5, 'have'),
-('spp-5ea82734a971b', 'spt-5ea53575d9662', '0002', 'qqq', '', 'bgy-5ea463916d2e3', 4, 'qe', 0, 4, 'have'),
-('spp-5ea82734ad796', 'spt-5ea53575d9662', '0002', 'qqq', '', 'bgy-5ea463916d2e3', 4, 'qe', 0, 4, 'have'),
-('spp-5ea82734aedf9', 'spt-5ea53575d9662', '0002', 'qqq', '', 'bgy-5ea463916d2e3', 4, 'qe', 0, 4, 'have'),
-('spp-5ea82cfee6c39', 'spt-5ea580459158d', '0002', '000000', '', 'bgy-5ea463916d2e3', 6, '456', 0, 6, 'have'),
-('spp-5ea82cfee7e46', 'spt-5ea580459158d', '0002', '000000', '', 'bgy-5ea463916d2e3', 6, '456', 0, 6, 'have'),
-('spp-5ea82ff0dc6ab', 'spt-5ea53575d9662', '0002', 'eeeee', '', 'bgy-5ea463916d2e3', 5, 'e', 0, 5, 'have'),
-('spp-5ea8301561ac2', 'spt-5ea53575d9662', '0002', 'ewewew', '', 'bgy-5ea463916d2e3', 4, 'w', 0, 4, 'have'),
-('spp-5ea8301565ba3', 'spt-5ea53575d9662', '0002', 'ewewew', '', 'bgy-5ea463916d2e3', 4, 'w', 0, 4, 'have'),
-('spp-5ea8301567b24', 'spt-5ea53575d9662', '0002', 'ewewew', '', 'bgy-5ea463916d2e3', 4, 'w', 0, 4, 'have'),
-('spp-5eabdaad6c67b', 'spt-5ea53575d9662', '0002', '456', '', 'bgy-5ea463916d2e3', 3, 'กกก', 0, 3, 'have'),
-('spp-5eabdaad7fb8c', 'spt-5ea53575d9662', '0002', '456', '', 'bgy-5ea463916d2e3', 3, 'กกก', 0, 3, 'have');
+INSERT INTO `spare_part` (`sp_id`, `sptype_id`, `spp_partnumber`, `part_detail`, `serial_number`, `budget_id`, `purchasing_amount`, `dump_id`, `take_out`, `part_qty`, `status`) VALUES
+('spp-5ea536c3be3ae', 'spt-5ea53575d9662', '0001', 'INTEL', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have'),
+('spp-5ea581181f4c8', 'spt-5ea580459158d', '0001', '4 port USB 3.0 HUB', '', 'bgy-5ea463916d2e3', 5, 'DU-5edcf14620255', 0, 5, 'have'),
+('spp-5ea5ca6015905', 'spt-5ea53575d9662', '0002', 'INTEL GEN5', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have'),
+('spp-5ea5cb2d517c3', 'spt-5ea53575d9662', '0002', 'INTEL GEN5', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have'),
+('spp-5ea5cc4259c0e', 'spt-5ea53575d9662', '0003', 'INTEL GEN7', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have'),
+('spp-5ea5cd1301b7a', 'spt-5ea53575d9662', '0003', 'INTEL GEN7', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have'),
+('spp-5ea5d13101db2', 'spt-5ea53575d9662', '0002', '0000000', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have'),
+('spp-5ea826d06011c', 'spt-5ea53575d9662', '0002', 'gggg', '', 'bgy-5ea463916d2e3', 6, 'DU-5edcf14620255', 0, 6, 'have'),
+('spp-5ea826d0611d6', 'spt-5ea53575d9662', '0002', 'gggg', '', 'bgy-5ea463916d2e3', 6, 'DU-5edcf14620255', 0, 6, 'have'),
+('spp-5ea826ef70a08', 'spt-5ea53575d9662', '0002', 'g', '', 'bgy-5ea463916d2e3', 5, 'DU-5edcf14620255', 0, 5, 'have'),
+('spp-5ea827131a193', 'spt-5ea53575d9662', '0002', 'f', '', 'bgy-5ea463916d2e3', 5, 'DU-5edcf14620255', 0, 5, 'have'),
+('spp-5ea82734a971b', 'spt-5ea53575d9662', '0002', 'qqq', '', 'bgy-5ea463916d2e3', 4, 'DU-5edcf14620255', 0, 4, 'have'),
+('spp-5ea82734ad796', 'spt-5ea53575d9662', '0002', 'qqq', '', 'bgy-5ea463916d2e3', 4, 'DU-5edcf14620255', 0, 4, 'outofstock'),
+('spp-5ea82734aedf9', 'spt-5ea53575d9662', '0002', 'qqq', '', 'bgy-5ea463916d2e3', 4, 'DU-5edcf14620255', 0, 4, 'have'),
+('spp-5ea82cfee6c39', 'spt-5ea580459158d', '0002', '000000', '', 'bgy-5ea463916d2e3', 6, 'DU-5edcf14620255', 0, 6, 'have'),
+('spp-5ea82cfee7e46', 'spt-5ea580459158d', '0002', '000000', '', 'bgy-5ea463916d2e3', 6, 'DU-5edcf14620255', 0, 6, 'have'),
+('spp-5ea82ff0dc6ab', 'spt-5ea53575d9662', '0002', 'eeeee', '', 'bgy-5ea463916d2e3', 5, 'DU-5edcf14620255', 0, 5, 'have'),
+('spp-5ea8301561ac2', 'spt-5ea53575d9662', '0002', 'ewewew', '', 'bgy-5ea463916d2e3', 4, 'DU-5edcf14620255', 0, 4, 'have'),
+('spp-5ea8301565ba3', 'spt-5ea53575d9662', '0002', 'ewewew', '', 'bgy-5ea463916d2e3', 4, 'DU-5edcf14620255', 0, 4, 'have'),
+('spp-5ea8301567b24', 'spt-5ea53575d9662', '0002', 'ewewew', '', 'bgy-5ea463916d2e3', 4, 'DU-5edcf14620255', 0, 4, 'have'),
+('spp-5edd5715aa56c', 'spt-5ea535eb5c3a0', '0002', 'wwwww', '', 'bgy-5ea463916d2e3', 6, '34', 0, 6, 'have'),
+('spp-5edd64d3d459f', 'spt-5ea535eb5c3a0', '0002', 'GEN10', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'outofstock'),
+('spp-5edd64d3d5c11', 'spt-5ea535eb5c3a0', '0002', 'GEN10', '', 'bgy-5ea463916d2e3', 20, 'DU-5edcf14620255', 0, 20, 'have');
 
 -- --------------------------------------------------------
 
@@ -350,10 +370,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `userde_id`, `level`, `status`) VALUES
-('UD-root', 'root', '*F90B6576111DD063A65BC2CA6BADED74C2E4FAEE', 'UD-root', 'SysADMIN', 'active'),
 ('US-5e746c624bdea', 'songkiat.t', '*56C1607598715992428AF396B1B56E6A8DA8EAC3', 'UD-5e746a20b735b', 'ADMIN', 'active'),
 ('US-5e746d255235d', 'teerayut.n', '*600FE53B55C3FAE8A9FCAB8060125364879C08E3', 'UD-5e746a91b1538', 'ADMIN', 'active'),
-('US-5e746d5fb7577', 'aumnuay.n', '*4CB947971FACB7AB4E93FAF2078DD186A4C91A46', 'UD-5e746b608c3ec', 'OFFICER', 'active');
+('US-5e746d5fb7577', 'aumnuay.n', '*4CB947971FACB7AB4E93FAF2078DD186A4C91A46', 'UD-5e746b608c3ec', 'OFFICER', 'active'),
+('us-5edd6f1fe1a20', 'ssss', '*5CA21153986A27343DDF7E88ABB3C8454F2E6008', 'ud-5edd6f1fe1a1d', 'OFFICER', 'pending'),
+('US-root', 'root', '*F90B6576111DD063A65BC2CA6BADED74C2E4FAEE', 'UD-root', 'SysADMIN', 'active');
 
 -- --------------------------------------------------------
 
@@ -380,7 +401,8 @@ INSERT INTO `userdetail` (`userde_id`, `rank_id`, `firstname`, `lastname`, `pos_
 ('UD-5e746a20b735b', 'R9', 'ทรงเกียรติ', 'ทับสูงเนิน', 'POS1', '0000000000', 'No', 'DEP1'),
 ('UD-5e746a91b1538', 'R15', 'ธีระยุทธ', 'น่วมภักดี', 'POS2', '0000000000', 'No', 'DEP1'),
 ('UD-5e746b608c3ec', 'R19', 'อำนวย', 'เนตรน้อย', 'POS3', '0000000000', 'No', 'DEP1'),
-('UD-root', NULL, 'root', 'root', NULL, '0000000000', 'No', NULL);
+('ud-5edd6f1fe1a1d', 'R25', 'ssssss', 'ssssss', 'POS2', '0000000000', '', 'DEP1'),
+('UD-root', NULL, 'root', '', NULL, '0000000000', '', NULL);
 
 --
 -- Indexes for dumped tables
@@ -409,6 +431,12 @@ ALTER TABLE `budget_year`
 ALTER TABLE `department`
   ADD PRIMARY KEY (`dep_id`),
   ADD KEY `org_id` (`org_id`);
+
+--
+-- Indexes for table `dump`
+--
+ALTER TABLE `dump`
+  ADD PRIMARY KEY (`dump_id`);
 
 --
 -- Indexes for table `fix`

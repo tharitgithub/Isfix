@@ -2,25 +2,39 @@ $(document).ready(function() {
 
   $("#storeAdd_button").click(function() {
     menu();
-    link('control/store_add.php', '#home', '#topic', menu["parts"]["l1"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["parts"]["l1"], '#bread');
+    link('control/store_add.php', '#home', '#topic', menu["store"]["header"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["store"]["header"], '#bread');
   });
 
-  $("#spname-select").html(spnameHtml());
-  $("#sptype-select").html(sptypeHtml());
-  $("#budget-select").html(budgetHtml());
   $("#category-select").html(categoryHtml());
-
-  $("#table_store").append(table(getLoginLevel()));
-                  datatables();
-
-
   $("#category-select").change(function () {
     var spcategory_id = $("#category-select option:selected").val();
+    $("#spname-select").html(spnameHtml(spcategory_id));
     $("#table_store").empty();
-    $("#table_store").append(showStore(spcategory_id,getLoginLevel()));
+    $("#table_store").append(showStore(spcategory_id,"category",getLoginLevel()));
                               datatables();
-
   });
+
+  $("#spname-select").change(function() {
+      var spname_id = $("#spname-select option:selected").val();
+      $("#sptype-select").html(sptypeHtml(spname_id));
+      $("#table_store").empty();
+      $("#table_store").append(showStore(spname_id,"spname",getLoginLevel()));
+                              datatables();
+  });
+
+  $("#sptype-select").change(function() {
+      var sptype_id = $("#sptype-select option:selected").val();
+      $("#table_store").empty();
+      $("#table_store").append(showStore(sptype_id,"sptype",getLoginLevel()));
+                              datatables();
+  });
+
+  $("#table_store").append(showStore("","",getLoginLevel()));
+                  datatables();
+
+  $("#budget-select").html(budgetHtml());
+  $("#dump-select").html(dumpHtml());
+
 
   function table(level) {
     var table="";
@@ -61,7 +75,7 @@ $(document).ready(function() {
     });
   }
 
-  function showStore(spcategory_id,level) {
+  function showStore(id_key,key,level) {
     var table="";
     var a="";
 
@@ -69,7 +83,7 @@ $(document).ready(function() {
             url:'control/ajax/ajax_store.php',
             async:false,
             type:'post',
-            data:{id:"get_store",spcategory_id:spcategory_id},
+            data:{id:"get_store",id_key:id_key,key:key},
             dataType:'json',
             success: function (response) {
                 var no=1;
@@ -88,13 +102,19 @@ $(document).ready(function() {
                             "<td class='text-center'>"+value.budgety_code+"</td>"+
                             "<td class='text-right'>"+value.take_out+"</td>"+
                             "<td class='text-right'>"+value.part_qty+"</td>"+
-                            "<td>"+value.dump+"</td>"+
-                            "<td class='text-center'>"+value.status+"</td>";
+                            "<td>"+value.dump_name+"</td>"+
+                            "<td class='text-center'>";
+                            if (value.status=="have") {
+                              table+="<p class='text-success'>มีของ</p>";
+                            }else {
+                              table+="<p class='text-danger'>ของหมด</p>";
+                            }
+                            table+="</td>";
 
                   if (level=="SysADMIN") {
                      table+="<td class='text-center'>"+
-                            "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.sp_id + "'><i class='fas fa-edit mr-1'></i>แก้ไข</a>"+
-                            "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.sp_id + "'><i class='fas fa-trash mr-1'></i>ลบ</a>"+
+                            "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.sp_id + "'><i class='fas fa-edit'></i></a>"+
+                            "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.sp_id + "'><i class='fas fa-trash'></i></a>"+
                             "</td>";
                             }
 
@@ -160,9 +180,8 @@ $(document).ready(function() {
     return level;
   }
 
-
-  $(document).on("submit","#store_add-form",function() {
-
+  $(document).on("submit","#store_add-form",function(e) {
+    e.preventDefault();
      var serial_number = $("#serial-number").val();
      var spname_select = $("#spname-select").val();
      var sptype_select = $("#sptype-select").val();
@@ -170,7 +189,7 @@ $(document).ready(function() {
      var category_select = $("#category-select").val();
      var purchasing_amount_number = $("#purchasing_amount-number").val();
      var budget = $("#budget-select").val();
-     var dump = $("#dump").val();
+     var dump = $("#dump-select").val();
 
      $.post("control/ajax/ajax_store.php",
      {
@@ -179,7 +198,7 @@ $(document).ready(function() {
        spname_select:spname_select,
        sptype_select:sptype_select,
        part_detail:part_detail,
-       category_select:"spc-5ea469210eb96",
+       category_select:category_select,
        purchasing_amount_number:purchasing_amount_number,
        budget:budget,
        dump:dump
@@ -236,57 +255,9 @@ $(document).ready(function() {
 
      //location.href = "home";
 
-     return false;
+     //return false;
   });
 
-
-  function spnameHtml() {
-    var optionspname;
-
-    $.ajax({
-      url: 'control/ajax/ajax_store.php',
-      async: false,
-      type: 'post',
-      data: {
-        id: "get_spname"
-      },
-      dataType: 'json',
-      success: function (output) {
-        optionspname += "<option disabled='disabled' selected='selected'>กรุณาเลือกตระกูล</option>";
-
-        $.each(output.spname,
-          function(index,value) {
-            optionspname += "<option value='"+value.spname_id+"'>"+value.spname_name+"</option>";
-        });
-      }
-    });
-
-    return optionspname;
-  }
-
-  function sptypeHtml() {
-    var optionsptype;
-
-    $.ajax({
-      url: 'control/ajax/ajax_store.php',
-      async: false,
-      type: 'post',
-      data: {
-        id: "get_sptype"
-      },
-      dataType: 'json',
-      success: function (output) {
-        optionsptype += "<option disabled='disabled' selected='selected'>กรุณาเลือกชนิด</option>";
-
-        $.each(output.sptype,
-          function(index,value) {
-            optionsptype += "<option value='"+value.sptype_id+"'>"+value.sptype_name+"</option>";
-        });
-      }
-    });
-
-    return optionsptype;
-  }
 
   function categoryHtml() {
     var optionCategory;
@@ -304,13 +275,65 @@ $(document).ready(function() {
 
         $.each(output.category,
           function(index,value) {
-            optionCategory += "<option value='"+value.spcategory_id+"'>"+value.spcategory_name+"</option>";
+            optionCategory += "<option value='"+value.spcategory_id+"' data-spcategory_name='"+value.spcategory_name+"'>"+value.spcategory_name+"</option>";
         });
       }
     });
 
     return optionCategory;
   }
+
+
+  function spnameHtml(spcategory_id) {
+    var optionspname;
+
+    $.ajax({
+      url: 'control/ajax/ajax_store.php',
+      async: false,
+      type: 'post',
+      data: {
+        id: "get_spname",
+        spcategory_id:spcategory_id
+      },
+      dataType: 'json',
+      success: function (output) {
+        optionspname += "<option disabled='disabled' selected='selected'>กรุณาเลือกหมวดหมู่</option>";
+
+        $.each(output.spname,
+          function(index,value) {
+            optionspname += "<option value='"+value.spname_id+"'>"+value.spname_name+"</option>";
+        });
+      }
+    });
+
+    return optionspname;
+  }
+
+  function sptypeHtml(spname_id) {
+    var optionsptype;
+
+    $.ajax({
+      url: 'control/ajax/ajax_store.php',
+      async: false,
+      type: 'post',
+      data: {
+        id: "get_sptype",
+        spname_id:spname_id
+      },
+      dataType: 'json',
+      success: function (output) {
+        optionsptype += "<option disabled='disabled' selected='selected'>กรุณาเลือกชนิด</option>";
+
+        $.each(output.sptype,
+          function(index,value) {
+            optionsptype += "<option value='"+value.sptype_id+"'>"+value.sptype_name+"</option>";
+        });
+      }
+    });
+
+    return optionsptype;
+  }
+
 
   function budgetHtml() {
     var optionsptype;
@@ -334,6 +357,31 @@ $(document).ready(function() {
     });
 
     return optionsptype;
+  }
+
+
+  function dumpHtml() {
+    var optiondump;
+
+    $.ajax({
+      url: 'control/ajax/ajax_store.php',
+      async: false,
+      type: 'post',
+      data: {
+        id: "get_dump"
+      },
+      dataType: 'json',
+      success: function (output) {
+        optiondump += "<option disabled='disabled' selected='selected'>กรุณาเลือกที่เก็บ</option>";
+
+        $.each(output.dump,
+          function(index,value) {
+            optiondump += "<option value='"+value.dump_id+"'>"+value.dump_name+"</option>";
+        });
+      }
+    });
+
+    return optiondump;
   }
 
   function menu() {
