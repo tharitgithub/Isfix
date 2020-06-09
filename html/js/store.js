@@ -92,36 +92,61 @@ $(document).ready(function() {
                        thead_tfoot(level)+
                        "</thead>"+
                        "<tbody>";
-             $.each(response.store,
-              function(index,value) {
-              table += "<tr>"+
-                            "<td class='text-center'>"+ (no++) +"</td>"+
-                            "<td class='text-left'>"+value.spname_name+" "+value.sptype_name+" "+value.part_detail+"</td>"+
-                            "<td>"+value.spn_partnumber+" "+value.spt_partnumber+" "+value.spp_partnumber+"</td>"+
-                            "<td class='text-right'>"+value.purchasing_amount+"</td>"+
-                            "<td class='text-center'>"+value.budgety_code+"</td>"+
-                            "<td class='text-right'>"+value.take_out+"</td>"+
-                            "<td class='text-right'>"+value.part_qty+"</td>"+
-                            "<td>"+value.dump_name+"</td>"+
-                            "<td class='text-center'>";
-                            if (value.status=="have") {
-                              table+="<p class='text-success'>มีของ</p>";
-                            }else {
-                              table+="<p class='text-danger'>ของหมด</p>";
-                            }
-                            table+="</td>";
 
-                  if (level=="SysADMIN") {
-                     table+="<td class='text-center'>"+
-                            "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.sp_id + "'><i class='fas fa-edit'></i></a>"+
-                            "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.sp_id + "'><i class='fas fa-trash'></i></a>"+
-                            "</td>";
-                            }
+                       if (level!="OFFICER") {
+                         $.each(response.store,
+                          function(index,value) {
+                          table += "<tr>"+
+                                        "<td class='text-center'>"+ (no++) +"</td>"+
+                                        "<td class='text-left'>"+value.spname_name+" "+value.sptype_name+" "+value.part_detail+"</td>"+
+                                        "<td>"+value.spn_partnumber+" "+value.spt_partnumber+" "+value.spp_partnumber+"</td>"+
+                                        "<td class='text-right'>"+value.purchasing_amount+"</td>"+
+                                        "<td class='text-center'>"+value.budgety_code+"</td>"+
+                                        "<td class='text-right'>"+value.take_out+"</td>"+
+                                        "<td class='text-right'>"+value.part_qty+"</td>"+
+                                        "<td>"+value.dump_name+"</td>"+
+                                        "<td class='text-center'>";
+                                        if (value.status=="have") {
+                                          table+="<p class='text-success'>มีของ</p>";
+                                        }else {
+                                          table+="<p class='text-danger'>ของหมด</p>";
+                                        }
+                                        table+="</td>";
 
-                     table+="</tr>";
+                              if (level=="SysADMIN") {
+                                 table+="<td class='text-center'>"+
+                                        "<button class='btn btn-primary btn-sm mr-1' href='#' data-id='" + value.sp_id + "'><i class='fas fa-edit'></i></a>"+
+                                        "<button class='btn btn-danger btn-sm' href='#' data-id='" + value.sp_id + "'><i class='fas fa-trash'></i></a>"+
+                                        "</td>";
+                                        }
 
-                       });
+                                 table+="</tr>";
 
+                                   });
+                       }else {
+                         $.each(response.store,
+                          function(index,value) {
+                          table += "<tr>"+
+                                        "<td class='text-center'>"+ (no++) +"</td>"+
+                                        "<td class='text-left'>"+value.spname_name+" "+value.sptype_name+" "+value.part_detail+"</td>"+
+                                        "<td>"+value.spn_partnumber+" "+value.spt_partnumber+" "+value.spp_partnumber+"</td>"+
+                                        "<td class='text-right'>"+value.purchasing_amount+"</td>"+
+                                        "<td class='text-right'>"+value.part_qty+"</td>"+
+                                        "<td>"+value.dump_name+"</td>"+
+                                        "<td class='text-center'>";
+                                        if (value.status=="have") {
+                                          table+="<p class='text-success'>มีของ</p>";
+                                        }else {
+                                          table+="<p class='text-danger'>ของหมด</p>";
+                                        }
+                                        table+="</td>";
+
+
+                                 table+="</tr>";
+
+                                   });
+                       }
+                       
                        table+="</tbody>"+
                               "</table>";
 

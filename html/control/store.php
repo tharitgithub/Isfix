@@ -7,7 +7,7 @@
 
         <div class="card-tile">
           <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
               <div class="form-group row">
                 <label class="col-sm-1 col-form-label text-right">ประเภท</label>
                 <div class="col-sm-3">
@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="col-sm-2">
-              <button class='btn btn-success mr-1' href='#' id='storeAdd_button'><i class='fas fa-plus mr-1'></i>เพิ่มรายการ</button>
+
             </div>
           </div>
         </div>
