@@ -1,10 +1,7 @@
 $(document).ready(function() {
 
-  $("#storeAdd_button").click(function() {
-    menu();
-    link('control/store_add.php', '#home', '#topic', menu["store"]["header"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["store"]["header"], '#bread');
-  });
 
+  buttonStore(getLoginLevel());
   $("#category-select").html(categoryHtml());
   $("#category-select").change(function () {
     var spcategory_id = $("#category-select option:selected").val();
@@ -72,6 +69,20 @@ $(document).ready(function() {
                             "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
                           }
               }
+    });
+  }
+
+  function buttonStore(level) {
+    var button="";
+        button+="<button class='btn btn-success mr-1' href='#' id='storeAdd_button'><i class='fas fa-plus mr-1'></i>เพิ่มรายการ</button>";
+        if (level!="OFFICER") {
+          $("#store_button").append(button);
+          $("#col-store").removeClass("col-sm-12").addClass("col-sm-10");
+        }
+
+    $("#storeAdd_button").click(function() {
+      menu();
+      link('control/store_add.php', '#home', '#topic', menu["store"]["header"], "<i class='nav-icon fas fa-store mr-1'></i>"+menu["store"]["header"], '#bread');
     });
   }
 
@@ -146,7 +157,7 @@ $(document).ready(function() {
 
                                    });
                        }
-                       
+
                        table+="</tbody>"+
                               "</table>";
 

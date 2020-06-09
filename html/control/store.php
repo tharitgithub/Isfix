@@ -7,7 +7,7 @@
 
         <div class="card-tile">
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" id="col-store">
               <div class="form-group row">
                 <label class="col-sm-1 col-form-label text-right">ประเภท</label>
                 <div class="col-sm-3">
@@ -32,11 +32,16 @@
 
               </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 text-right" id="store_button">
+
 
             </div>
+
+
           </div>
         </div>
+
+
 
       </div>
       <div class="card-body table-responsive p-0" id="table_store">
