@@ -110,7 +110,7 @@ $(document).ready(function() {
                           table += "<tr>"+
                                         "<td class='text-center'>"+ (no++) +"</td>"+
                                         "<td class='text-left'>"+value.spname_name+" "+value.sptype_name+" "+value.part_detail+"</td>"+
-                                        "<td>"+value.spn_partnumber+" "+value.spt_partnumber+" "+value.spp_partnumber+"</td>"+
+                                        "<td>"+value.spn_partnumber+"-"+value.spt_partnumber+"-"+value.spp_partnumber+"</td>"+
                                         "<td class='text-right'>"+value.purchasing_amount+"</td>"+
                                         "<td class='text-center'>"+value.budgety_code+"</td>"+
                                         "<td class='text-right'>"+value.take_out+"</td>"+
@@ -140,7 +140,7 @@ $(document).ready(function() {
                           table += "<tr>"+
                                         "<td class='text-center'>"+ (no++) +"</td>"+
                                         "<td class='text-left'>"+value.spname_name+" "+value.sptype_name+" "+value.part_detail+"</td>"+
-                                        "<td>"+value.spn_partnumber+" "+value.spt_partnumber+" "+value.spp_partnumber+"</td>"+
+                                        "<td>"+value.spn_partnumber+"-"+value.spt_partnumber+"-"+value.spp_partnumber+"</td>"+
                                         "<td class='text-right'>"+value.purchasing_amount+"</td>"+
                                         "<td class='text-right'>"+value.part_qty+"</td>"+
                                         "<td>"+value.dump_name+"</td>"+

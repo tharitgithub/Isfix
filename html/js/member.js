@@ -398,6 +398,51 @@ if($(this).is(':checked')){
     })
   });
 
+  $(document).on("click","#member_data",function (e) {
+      e.preventDefault();
+      var user,permiss="",status="";
+      var user_id = $(this).attr("data-id");
+      $.ajax({
+        url: 'control/ajax/ajax_member.php',
+        async: false,
+        type: 'post',
+        data: {
+          id: "get_userData",
+          user_id:user_id
+        },
+        dataType: 'json',
+        success: function (response) {
+          user = response.userdata;
+        }
+      });
+
+      $("#username-view").val(user[0].username);
+      $("#rank-view").val(user[0].rank_name);
+      $("#name-view").val(user[0].firstname);
+      $("#lastname-view").val(user[0].lastname);
+      $("#position-view").val(user[0].pos_name);
+
+      if (user[0].level == "ADMIN") {
+        permiss += "ผู้ดูแลระบบ";
+      } else {
+        permiss += "เจ้าหน้าที่";
+      }
+      $("#permiss-view").val(permiss);
+
+      if (user[0].status == "active") {
+        status += "<td><span class='badge badge-success'>ปกติ</span></td>";
+      } else if (user[0].status == "not_active") {
+        status += "<td><span class='badge badge-danger'>ระงับ</span></td>";
+      } else {
+        status += "<td><span class='badge badge-warning'>รอการอนุมัติ</span></td>";
+      }
+
+      $("#status-view").html(status);
+
+
+
+    });
+
   $(document).on("click","#delete",function () {
       var user_id = $(this).attr("data-id");
       $("#user_id").val(user_id);
@@ -557,6 +602,13 @@ if($(this).is(':checked')){
   });
 
 
+  function getUserData(user_id) {
+    var user;
+
+
+    return user;
+  }
+
   function rankOptionHtml() {
     var optionrank;
 
@@ -648,7 +700,7 @@ if($(this).is(':checked')){
             tmember += "<td>" + value.pos_name + "</td>";
 
             tmember += "<td class='project-actions text-center'>";
-            tmember += "<a class='btn btn-primary btn-sm' href='#' data-id='" + value.user_id + "'><i class='fas fa-folder'></i></a>";
+            tmember += "<a class='btn btn-primary btn-sm' href='#' id='member_data'  data-toggle='modal' data-target='#member_view'  data-id='" + value.user_id + "'><i class='fas fa-folder'></i></a>";
             tmember += "</td>"
 
             if (value.level == "ADMIN") {

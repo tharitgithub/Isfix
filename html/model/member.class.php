@@ -46,6 +46,27 @@ class member extends dbconnect
      return $result;
   }
 
+  public function getUserData($user_id)
+  {
+    $sql = "SELECT *
+            FROM user u
+            INNER JOIN userdetail ud ON u.userde_id = ud.userde_id
+            INNER JOIN rank r ON ud.rank_id = r.rank_id
+            LEFT JOIN position p ON ud.pos_id = p.pos_id
+            WHERE u.user_id = '".
+            dbconnect::escapeString($user_id)."'";
+            dbconnect::dataQuery($sql);
+            $this->result = dbconnect::dataResult();
+
+            while ($row = $this->result->fetch_assoc()) {
+                $data[]=$row;
+            }
+
+            $result["userdata"] = $data;
+
+            return $result;
+  }
+
   public function getRank()
   {
     $result = array();
@@ -178,8 +199,7 @@ class member extends dbconnect
 
       $sql = "SELECT u.userde_id
               FROM user u
-              INNER JOIN userdetail ud
-              ON u.userde_id = ud.userde_id
+              INNER JOIN userdetail ud ON u.userde_id = ud.userde_id
               WHERE u.user_id = '".
               dbconnect::escapeString($user_id)."'";
               dbconnect::dataQuery($sql);

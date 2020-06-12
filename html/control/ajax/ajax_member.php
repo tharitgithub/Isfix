@@ -55,6 +55,11 @@ if (isset($_POST["id"])) {
     $result = $MEMBER->getDepartment();
     $getJson = $MEMBER->getJson($result);
     echo $getJson;
+  }elseif ($id=="get_userData") {
+    $user_id = $_POST["user_id"];
+    $result = $MEMBER->getUserData($user_id);
+    $getJson = $MEMBER->getJson($result);
+    echo $getJson;
   }else if($id=="member_add"){
 
     return  $MEMBER->memberAdd($_POST["username"],$_POST["password"],$_POST["rank"],$_POST["name"],$_POST["lastname"],$_POST["phonenumber"],$_POST["position"],$_POST["department"],$_POST["permiss"]);

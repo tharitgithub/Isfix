@@ -51,6 +51,7 @@
 
 <?php include '../js/modal/permise_Change.php';
       include '../js/modal/password_confirm.php';
+      include '../js/modal/member_view.php';
 ?>
 
 <script src="js/member.js"></script>

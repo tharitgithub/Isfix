@@ -104,9 +104,5 @@
 </div>
 </div>
 
-<?php
-include '../js/modal/modal_store.php';
- ?>
-
 <script src="js/store.js"></script>
 <script src="js/validation.js"></script>
