@@ -9,7 +9,7 @@
   <!-- /.card-header -->
   <!-- form start -->
   <form id="store_add-form" autocomplete="off">
-    <div class="card-body">
+    <div class="card-body p-2">
       <div class="row">
 
       <div class="col-sm-12">
@@ -54,7 +54,7 @@
 
       <div class="form-group">
         <label>รายละเอียด</label>
-        <input type="text" class="form-control" name="part_detail" id="part-detail" placeholder="รายละเอียด">
+        <textarea rows="3" class="form-control" name="part_detail" id="part-detail" placeholder="รายละเอียด"></textarea>
       </div>
 
       <div class="row">
