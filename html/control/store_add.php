@@ -18,14 +18,21 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Part Number</label>
-            <input type="text" class="form-control form-control" name="serial_number" id="serial-number" disabled="disabled">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-layer-group"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask name="serial_number" id="serial-number">
+            </div>
           </div>
         </div>
 
         <div class="col-sm-6">
           <div class="form-group">
             <label>ประเภท</label>
-            <select class="form-control form-control" name="category_select" id="category-select" style="width: 100%;">
+            <select class="form-control" name="category_select" id="category-select" style="width: 100%;">
 
             </select>
           </div>
@@ -36,9 +43,10 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>หมวดหมู่</label>
-            <select class="form-control form-control" name="spname_select" id="spname-select" style="width: 100%;">
+            <select class="form-control" name="spname_select" id="spname-select" style="width: 100%;">
               <option disabled='disabled' selected='selected'>กรุณาเลือกหมวดหมู่</option>
             </select>
+
           </div>
         </div>
 
@@ -54,14 +62,29 @@
 
       <div class="form-group">
         <label>รายละเอียด</label>
-        <textarea rows="3" class="form-control" name="part_detail" id="part-detail" placeholder="รายละเอียด"></textarea>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-file-alt"></i>
+            </span>
+          </div>
+          <textarea rows="3" class="form-control" name="part_detail" id="part-detail" placeholder="รายละเอียด"></textarea>
+        </div>
+
       </div>
 
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
             <label>จำนวน</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-file-alt"></i>
+                </span>
+              </div>
               <input type="number" class="form-control" name="purchasing_amount_number" id="purchasing_amount-number" min="1" placeholder="จำนวน">
+            </div>
           </div>
         </div>
         <div class="col-sm-6">

@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-primary card-outline p-0">
-      <div class="card-header p-1">
+      <div class="card-header">
 
         <div class="card-tile">
           <div class="row">

@@ -40,6 +40,18 @@ if (!isset($_SESSION["checklogin"])) {
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">ประเภท</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">หมวดหมู่</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">ชนิด</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">ที่เก็บ</a>
+      </li>
 
     </ul>
 
@@ -126,7 +138,7 @@ if (!isset($_SESSION["checklogin"])) {
       <div class="container-fluid p-0">
         <div class="row mb-0">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark" id="topic">หน้าแรก</h1>
+              <h1 class="m-0 text-dark" id="topic">หน้าแรก</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -225,9 +237,19 @@ if (!isset($_SESSION["checklogin"])) {
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
+<!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+
 
 <script src="js/home.js"></script>
 <script src="js/sweetalert/dist/sweetalert2.all.min.js"></script>
+
+<script>
+  $(function () {
+    $('[data-mask]').inputmask()
+  })
+</script>
 
 </body>
 </html>

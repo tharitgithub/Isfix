@@ -45,7 +45,8 @@ $(document).ready(function() {
     },
     unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid');
-    }
+    },
+    onsubmit:false
 
   });
 
@@ -135,6 +136,9 @@ $(document).ready(function() {
   $("#store_add-form").validate({
 
       rules: {
+        serial_number:{
+          required:true
+        },
         spname_select:{
           required:true
         },
@@ -158,6 +162,9 @@ $(document).ready(function() {
         }
       },
       messages:{
+        serial_number:{
+          required:"Part Number ต้องไม่ว่างเปล่า"
+        },
         spname_select:{
           required:"ตระกูล ต้องไม่ว่างเปล่า"
         },
