@@ -12,18 +12,18 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     function __construct()
     {
-      /*
+
       $this->host = "us-cdbr-east-06.cleardb.net";
       $this->userDB="ba8771a5a7b086";
       $this->passDB="e693e96a04639ca";
       $this->dbname="heroku_c5a3ad28870ab19";
 
-      */
+      /*
       $this->host = "127.0.0.1";
       $this->userDB="root";
       $this->passDB="";
       $this->dbname="isfix";
-
+      */
 
       $this->con = new mysqli($this->host,$this->userDB,$this->passDB,$this->dbname);
       $this->con->set_charset("utf8");
