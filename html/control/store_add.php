@@ -116,7 +116,7 @@
     <div class="card-footer">
       <div class="row">
         <div class="col-sm-6">
-          <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle mr-1"></i>ตกลง</button>
+          <button id="store_add-submit" class="btn btn-primary"><i class="fas fa-check-circle mr-1"></i>ตกลง</button>
       </div>
       </div>
     </div>

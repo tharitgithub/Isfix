@@ -216,79 +216,82 @@ $(document).ready(function() {
     return level;
   }
 
-  $(document).on("submit","#store_add-form",function(e) {
-    e.preventDefault();
-     var serial_number = $("#serial-number").val();
-     var spname_select = $("#spname-select").val();
-     var sptype_select = $("#sptype-select").val();
-     var part_detail = $("#part-detail").val();
-     var category_select = $("#category-select").val();
-     var purchasing_amount_number = $("#purchasing_amount-number").val();
-     var budget = $("#budget-select").val();
-     var dump = $("#dump-select").val();
+  $("#store_add-form").click(function(e) {
+    //e.preventDefault();
 
-     $.post("control/ajax/ajax_store.php",
-     {
-       id:"store_add",
-       serial_number:serial_number,
-       spname_select:spname_select,
-       sptype_select:sptype_select,
-       part_detail:part_detail,
-       category_select:category_select,
-       purchasing_amount_number:purchasing_amount_number,
-       budget:budget,
-       dump:dump
-     },
-     function(data) {
+    if ($("store_add-submit").valid()) {
+      var serial_number = $("#serial-number").val();
+      var spname_select = $("#spname-select").val();
+      var sptype_select = $("#sptype-select").val();
+      var part_detail = $("#part-detail").val();
+      var category_select = $("#category-select").val();
+      var purchasing_amount_number = $("#purchasing_amount-number").val();
+      var budget = $("#budget-select").val();
+      var dump = $("#dump-select").val();
 
-       Swal.fire({
-         title: 'กำลังดำเนินการ',
-         timer: 2000,
-         timerProgressBar: true,
-         onBeforeOpen: () => {
-           Swal.showLoading()
-           timerInterval = setInterval(() => {
-             const content = Swal.getContent()
-             if (content) {
-               const b = content.querySelector('b')
-               if (b) {
-                 b.textContent = Swal.getTimerLeft()
-               }
-             }
-           }, 100)
-         },
-         onClose: () => {
-           clearInterval(timerInterval)
-         }
-       }).then((result) => {
+      $.post("control/ajax/ajax_store.php",
+      {
+        id:"store_add",
+        serial_number:serial_number,
+        spname_select:spname_select,
+        sptype_select:sptype_select,
+        part_detail:part_detail,
+        category_select:category_select,
+        purchasing_amount_number:purchasing_amount_number,
+        budget:budget,
+        dump:dump
+      },
+      function(data) {
 
-         if (data==3) {
-           Swal.fire({
-             title: "บันทึกข้อมูลสำเร็จ",
-             icon: 'success',
-             timer: 1500,
-             showConfirmButton: false
-           })
-         }else {
-           Swal.fire({
-             title: 'บันทึกข้อมูลไม่สำเร็จ',
-             icon: 'error',
-             timer: 1500,
-             showConfirmButton: false
-           })
-         }
+        Swal.fire({
+          title: 'กำลังดำเนินการ',
+          timer: 2000,
+          timerProgressBar: true,
+          onBeforeOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent()
+              if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                  b.textContent = Swal.getTimerLeft()
+                }
+              }
+            }, 100)
+          },
+          onClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
 
-       })
+          if (data==3) {
+            Swal.fire({
+              title: "บันทึกข้อมูลสำเร็จ",
+              icon: 'success',
+              timer: 1500,
+              showConfirmButton: false
+            })
+          }else {
+            Swal.fire({
+              title: 'บันทึกข้อมูลไม่สำเร็จ',
+              icon: 'error',
+              timer: 1500,
+              showConfirmButton: false
+            })
+          }
 
-     });
+        })
 
-
-     setTimeout(function() {
-           location.href = "home";
-           //link('control/member.php', '#home', '#topic', "เพิ่มผู้ใช้งาน", '#bread');
-       }, 4000);
+      });
 
 
+      setTimeout(function() {
+            location.href = "home";
+            //link('control/member.php', '#home', '#topic', "เพิ่มผู้ใช้งาน", '#bread');
+        }, 4000);
+    }else {
+
+    }
      //location.href = "home";
 
      //return false;

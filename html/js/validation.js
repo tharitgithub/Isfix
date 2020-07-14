@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   $("#password-confirm-form").validate({
+
       rules: {
         password_cf:{
           required:true
@@ -55,7 +56,7 @@ $(document).ready(function() {
 
       rules: {
         username_member:{
-          required:true
+          required:true          
         },
         password_member:{
           required:true,

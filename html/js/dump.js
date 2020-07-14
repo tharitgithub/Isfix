@@ -80,15 +80,15 @@ $(document).ready(function() {
     var thead_tfoot="";
     if (level!="OFFICER") {
       thead_tfoot+="<tr class='text-left'>";
-      thead_tfoot+="<th width='30%' class='text-center'>#</th>";
+      thead_tfoot+="<th width='10%' class='text-center'>#</th>";
       thead_tfoot+="<th>รายการ</th>";
       if (level=="SysADMIN") {
-        thead_tfoot+="<th class='text-center'>จัดการ</th>";
+        thead_tfoot+="<th width='20%' class='text-center'>จัดการ</th>";
       }
       thead_tfoot+="</tr>";
     }else {
       thead_tfoot+="<tr class='text-left'>";
-      thead_tfoot+="<th width='30%' class='text-center'>#</th>";
+      thead_tfoot+="<th width='10%' class='text-center'>#</th>";
       thead_tfoot+="<th>รายการ</th>";
 
       thead_tfoot+="</tr>";
